@@ -31,23 +31,23 @@ public class VolsBD {
 
           return null; 
       }
-	  public static List<Vol> searchVols(String departure, String arrival, String departureTime) {
-			// TODO Auto-generated method stub
-			ArrayList<Vol> search = new ArrayList<Vol>();
-			Integer h;
-			if (departureTime.equals("all")) {
-				h = Integer.valueOf(departureTime);
-			}
-			else { h = -999;}
-			for (Vol v : vols) {
-				  if ((v.getVilleDepart().equals(departure)||departure.equals("all") )
-						  &&(v.getVilleArrivee().equals(arrival)||arrival.equals("all"))
-						  &&(v.getHeureDepart()==(h)||departureTime.equals("all"))
-						  ) {
-					  search.add(v);
-				  }
-				  
-			  }
-			return search;
+	  
+	  public static List<Vol> getVols(String departure, String arrival, int departureTime) {
+
+          List<Vol> search = new ArrayList<Vol>();
+        try 
+        {
+            for (Vol v : vols) 
+            {
+                if ((v.getVilleDepart().equals(departure)||departure.equals("all"))&&(v.getVilleArrivee().equals(arrival)||arrival.equals("all"))&&((v.getHeureDepart()==departureTime)||departureTime==-1)) 
+
+                {
+                   search.add(v);
+                }
+
+            }
+        }
+        catch(NumberFormatException e) {}
+        return search;
+  }
 	}
-}

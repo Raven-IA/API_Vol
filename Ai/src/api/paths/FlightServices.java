@@ -3,10 +3,12 @@ package api.paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -47,16 +49,14 @@ public class FlightServices {
 	}
 	
 	@GET
-	@Path("/search")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getSearch( @PathParam ( "departure" ) String departure,
-			@PathParam ( "arrival" ) String arrival,
-			 @PathParam ( "departureTime" ) String departureTime) {
-		List<Vol> vols = VolsBD.searchVols(departure,arrival,departureTime);
-		if (vols != null) {
-			return Response.ok().entity(vols).build();}
-
-		return Response.status(Status.NO_CONTENT).build();
-	}
-	
+    @Path("/search")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getParamFlight(@DefaultValue("all") @QueryParam("departure") String departure, @DefaultValue("all") @QueryParam("arrival") String arrival, @DefaultValue("-1") @QueryParam("departureTime") int departureTime)
+    {
+        List<Vol> lv = VolsBD.getVols(departure,arrival,departureTime);
+         if (lv != null) {
+            return Response.ok().entity(lv).build();
+        }
+        return Response.status(Status.NO_CONTENT).build();
+    }
 }
