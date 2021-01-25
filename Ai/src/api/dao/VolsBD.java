@@ -12,7 +12,7 @@ public class VolsBD {
 	    vols.add(new Vol("SXB127", "Strasbourg", "Paris", 1420)); 
 	    vols.add(new Vol("CDC129", "Poitiers", "Paris", 1710)); 
 	  } 
-
+      
 	  public static List<Vol> getVols() { return vols; }
 	  
 	  public static Vol getVols(String idNumVol) {

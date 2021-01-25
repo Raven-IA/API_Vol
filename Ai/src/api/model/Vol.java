@@ -1,6 +1,13 @@
 package api.model;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Vol { 
+	
+	  @Id
 	  private String numVol; 
 	  private String villeDepart; 
 	  private String villeArrivee; 
